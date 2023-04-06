@@ -43,10 +43,11 @@ def main():
             _, frame = cap.read()
             cv2.normalize(frame, frame, 0, 255, cv2.NORM_MINMAX)
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            resized = cv2.resize(gray, (cam_width, cam_height))
             
-            rects = detector(gray, 0)
+            rects = detector(resized, 0)
             for _, rect in enumerate(rects):
-                shape = predictor(gray, rect)
+                shape = predictor(resized, rect)
                 shape = face_utils.shape_to_np(shape)
                 
                 mouth = shape[49:61]
