@@ -1,4 +1,5 @@
 import os
+import math
 import dlib
 import cv2
 import serial
@@ -8,11 +9,13 @@ from urllib.request import urlretrieve
 from bz2 import decompress
 
 # config (depends on the camera)
-h_FOV = 60
-v_FOV = 40
 
-cam_width = 640
-cam_height = 480
+cam_width, cam_height = 640, 480
+ha, va = 4, 3
+
+d_FOV = 60
+h_FOV = math.atan(math.tan(d_FOV/(2*math.pi)/2) * (ha/math.sqrt(ha**2 + va**2))) * 2
+v_FOV = math.atan(math.tan(d_FOV/(2*math.pi)/2) * (va/math.sqrt(ha**2 + va**2))) * 2
 
 center_x = round(cam_width / 2)
 center_y = round(cam_height / 2)
