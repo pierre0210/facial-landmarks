@@ -63,10 +63,10 @@ def main():
             mouth = shape[49:61]
             x_min, y_min = mouth.min(axis=0)
             x_max, y_max = mouth.max(axis=0)
-            # width, height = (x_max - x_min), (y_max - y_min)
+            width, height = (x_max - x_min), (y_max - y_min)
             x_mid, y_mid = round((x_max + x_min) / 2), round((y_max + y_min) / 2)
             h_angle , v_angle = ((x_mid - center_x) / center_x) * (h_FOV / 2), ((y_mid - center_y) / center_y) * (v_FOV / 2)
-            print("{} {}".format(h_angle, v_angle))
+            print("{:_<3},{:_<3},{:_<7.3f},{:_<7.3f}".format(width, height, h_angle, v_angle))
             cv2.rectangle(resized, (x_min, y_min), (x_max, y_max), (255, 0, 0), 1)
             cv2.circle(resized, (x_mid, y_mid), 4, (255, 0, 0), -1)
         

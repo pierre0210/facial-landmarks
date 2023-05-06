@@ -60,12 +60,11 @@ def main():
                 x_mid, y_mid = round((x_max + x_min) / 2), round((y_max + y_min) / 2)
                 h_angle , v_angle = ((x_mid - center_x) / center_x) * (h_FOV / 2), ((y_mid - center_y) / center_y) * (v_FOV / 2)
                 
-                ser.write("{:>3} {:>3} {:>2} {:>2}\r\n".format(width, height, h_angle, v_angle).encode())
+                ser.write("{:_<3},{:_<3},{:_<7.3f},{:_<7.3f}\r\n".format(width, height, h_angle, v_angle).encode())
         except KeyboardInterrupt:
             break
     
     cap.release()
-    cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main()
