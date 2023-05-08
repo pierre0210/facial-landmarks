@@ -35,7 +35,7 @@ def check_model():
 def main():
     model_name = check_model()
     
-    ser = serial.Serial("/dev/ttyTHS1", 115200)
+    ser = serial.Serial("/dev/ttyTHS1", 9600)
     predictor = dlib.shape_predictor(model_name)
     detector = dlib.get_frontal_face_detector()
     
@@ -60,7 +60,7 @@ def main():
                 x_mid, y_mid = round((x_max + x_min) / 2), round((y_max + y_min) / 2)
                 h_angle , v_angle = ((x_mid - center_x) / center_x) * (h_FOV / 2), ((y_mid - center_y) / center_y) * (v_FOV / 2)
                 
-                ser.write("{:_<3},{:_<3},{:_<7.3f},{:_<7.3f}\r\n".format(width, height, h_angle, v_angle).encode())
+                ser.write("{:<3},{:<3},{:<7.3f},{:<7.3f}\r\n".format(width, height, h_angle, v_angle).encode())
         except KeyboardInterrupt:
             break
     
